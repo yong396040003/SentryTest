@@ -23,6 +23,20 @@ afterEvaluate {
                 //引用使用格式：implementation 'com.gitee.xiaweifeng:JitPackTest11:1.0'
             }
         }
+
+        //jitpack推送授权
+        repositories {
+            maven {
+                name('jitpack')
+                url "https://jitpack.io"
+                credentials {
+                    username gitUser
+                    password gitPassWord
+                }
+            }
+        }
+
+        
     }
 }
 

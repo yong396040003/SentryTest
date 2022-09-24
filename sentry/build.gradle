@@ -9,7 +9,7 @@ plugins {
 
 def properties = new Properties()
 properties.load(rootProject.file("local.properties").newInputStream())
-def gitUser = "yong396040003"
+def gitUser = "396040003@qq.com"
 def gitPassWord = "yong1234//"
 
 afterEvaluate {
@@ -36,7 +36,6 @@ afterEvaluate {
             }
         }
 
-        
     }
 }
 

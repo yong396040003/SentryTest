@@ -30,15 +30,6 @@ android {
     }
 }
 
-android {
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
-        }
-    }
-}
-
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -51,18 +42,19 @@ dependencies {
 }
 
 
-// 项目group/artifact/version信息
-group 'com.github.yong'
-// name 默认项目名
-version '1.0-SNAPSHOT'
-
-
+android {
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+}
 publishing {
     publications {
         release(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version project.version
+            groupId "com.github.yong"
+            artifactId "sentry"
+            version '1.0-SNAPSHOT'
 
             afterEvaluate {
                 from components.release

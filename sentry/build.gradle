@@ -29,6 +29,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
 }
 
 
@@ -44,17 +50,11 @@ dependencies {
     implementation 'io.sentry:sentry-android:6.4.2'
 }
 
-task androidSourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
 project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                artifact androidSourcesJar // optional sources
                 groupId = 'com.github.yong'//插件id，格式：com.gitee/github.用户名
                 artifactId = 'SentryUtils'//插件名称
                 version = '1.0'//版本号

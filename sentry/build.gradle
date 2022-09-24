@@ -9,8 +9,8 @@ plugins {
 
 def properties = new Properties()
 properties.load(rootProject.file("local.properties").newInputStream())
-def gitUser = properties.getProperty("gitUser")
-def gitPassWord = properties.getProperty("gitPassWord")
+def gitUser = "yong396040003"
+def gitPassWord = "yong1234//"
 
 afterEvaluate {
     publishing {

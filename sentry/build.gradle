@@ -7,47 +7,6 @@ plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.13.6'//用来发行aar版本的插件
 }
 
-def properties = new Properties()
-properties.load(rootProject.file("local.properties").newInputStream())
-def gitUser = "396040003@qq.com"
-def gitPassWord = "yong1234//"
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.yong'//插件id，格式：com.gitee/github.用户名
-                artifactId = 'SentryUtils'//插件名称
-                version = '1.0'//版本号
-                //引用使用格式：implementation 'com.gitee.xiaweifeng:JitPackTest11:1.0'
-            }
-        }
-
-        //jitpack推送授权
-        repositories {
-            maven {
-                name('jitpack')
-                url "https://jitpack.io"
-                credentials {
-                    username gitUser
-                    password gitPassWord
-                }
-            }
-        }
-
-    }
-}
-
-//release插件，https授权
-scmVersion{
-    repository{
-        customUsername = gitUser
-        customPassword = gitPassWord
-    }
-}
-
-
 android {
     compileSdk 32
 
@@ -85,18 +44,22 @@ dependencies {
     implementation 'io.sentry:sentry-android:6.4.2'
 }
 
-//task androidSourcesJar(type: Jar) {
-//    classifier 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
-//
-//project.afterEvaluate {
-//    publishing {
-//        publications {
-//            release(MavenPublication) {
-//                from components.release
-//                artifact androidSourcesJar // optional sources
-//            }
-//        }
-//    }
-//}
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                artifact androidSourcesJar // optional sources
+                groupId = 'com.github.yong'//插件id，格式：com.gitee/github.用户名
+                artifactId = 'SentryUtils'//插件名称
+                version = '1.0'//版本号
+                //引用使用格式：implementation 'com.gitee.xiaweifeng:JitPackTest11:1.0'
+            }
+        }
+    }
+}

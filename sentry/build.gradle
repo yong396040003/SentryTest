@@ -29,14 +29,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
 
+android {
     publishing {
         singleVariant('release') {
             withSourcesJar()
         }
     }
 }
-
 
 
 dependencies {
@@ -50,15 +51,15 @@ dependencies {
     implementation 'io.sentry:sentry-android:6.4.2'
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.yong'//插件id，格式：com.gitee/github.用户名
+            artifactId = 'SentryUtils'//插件名称
+            version = '1.0'//版本号
+
+            afterEvaluate {
                 from components.release
-                groupId = 'com.github.yong'//插件id，格式：com.gitee/github.用户名
-                artifactId = 'SentryUtils'//插件名称
-                version = '1.0'//版本号
-                //引用使用格式：implementation 'com.gitee.xiaweifeng:JitPackTest11:1.0'
             }
         }
     }

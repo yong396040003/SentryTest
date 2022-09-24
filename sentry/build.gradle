@@ -49,12 +49,14 @@ android {
         }
     }
 }
+
+
 publishing {
     publications {
         release(MavenPublication) {
-            groupId "com.github.yong"
-            artifactId "sentry"
-            version '1.0-SNAPSHOT'
+            groupId = 'com.my-company'
+            artifactId = 'my-library'
+            version = '1.0'
 
             afterEvaluate {
                 from components.release
